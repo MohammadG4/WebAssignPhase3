@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feastly - Add Recipe</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/addstyles.css' %}">
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <a href="{% url 'recipe_list' %}">Home</a>
+          <a href="{% url 'AddRecipe' %}" class="active">Add Recipe</a>
+          <a href="#">Favorites</a>
+          <a href="#">Search</a>
+          <a href="#">Logout</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+        <h2>Feastly - Add Recipe</h2>
+        <form id="recipe-form" method="post">
+              {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="course">Course Name</label>
+            <select id="course" name="course">
+                <option value="appetizers">Appetizers</option>
+                <option value="main_course">Main Course</option>
+                <option value="desserts">Desserts</option>
+            </select>
+            
+            <label for="ingredients">Ingredients</label>
+            <div class="ingredients-container">
+                <input name = "ingredients" type="text" id="ingredient" placeholder="Ingredient">
+            </div>
+            <ul id="ingredients-list"></ul>
+            
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description">
+            
+            <button type="submit">Add Recipe</button>
+        </form>
+    </div>
+
+        
+      
+</body>
+</html>

@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar ul li a.active {
+    color: #FF7622;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.recipe-details {
+    margin-bottom: 30px;
+}
+
+.recipe-details h2 {
+    color: #FF7622;
+    margin-top: 20px;
+}
+
+.recipe-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-details li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.edit-btn {
+    background-color: #FF7622;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #e65d00;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.favorite-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.favorite-btn:hover {
+    background-color: #218838;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background-color: #f76d12;
+    color: white;
+}
+
+.container > div > p:first-child {
+    font-size: 1.5rem;
+}
+
+.background {
+    width: 400px;
+    height: 400px;
+    background-color: #f76d12;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(100px);
+    transform: translateY(50%);
+    animation: move 10s linear infinite;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+}
+
+.ingredients ul li {
+    border: 2px solid #fac19b;
+    background-color: #f76d12;
+    padding: 4px 12px;
+    border-radius: 30px;
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+}
+
+.instructions ol {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 1.2rem;
+}
+
+.instructions ol li {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0.8rem;
+}

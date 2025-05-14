@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/recipe_list.css' %}">
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <a href="{% url 'recipe_list' %}" class="active">Home</a>
+          <a href="{% url 'AddRecipe' %}">Add Recipe</a>
+          <a href="#">Favorites</a>
+          <a href="#">Search</a>
+          <a href="#">Logout</a>
+        </div>
+      </nav>
+    </header>
+{% block content %}
+    <h1>All Recipes</h1>
+
+    <div id="big-container" class="recipes-container">
+      {% for x in key %}
+      <div class="recipe-card">
+        <h2>{{x.name}}</h2>
+        <p><strong>Course:</strong> {{x.course}}</p>
+        <p><strong>Ingredients:</strong> {{x.Ingredients}}</p>
+        <p class="description">
+          {{x.descripition}}.
+        </p>
+        <div class="card-actions">
+          <a href="{% url 'RecipePage' %}" class="details-btn">View Details</a>
+          <a href="{% url 'AddRecipe' %}" class="edit-btn">Edit</a>
+        </div>
+      </div>
+{% endfor %}
+
+    </div>
+
+{% endblock content %}
+</body>
+</html>
+
+

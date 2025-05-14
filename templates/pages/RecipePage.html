@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+<link rel = "stylesheet" href="{% static 'css/Recipepage.css' %}">
+
+    <title>Feastly - Recipe Details</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="{% url 'recipe_list' %}">Home</a></li>
+        <li><a href="{% url 'AddRecipe' %}">Add Recipe</a></li>
+        <li><a href="favorites.html">Favorites</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- <div class="background"></div> -->
+
+    <div class="container">
+        <h2>Recipe name: Spaghetti Bolognese</h2>
+    
+        <p style="color: #3f3f3f;">Course name</p>
+    
+        <div>
+            <p style="font-size: smaller; color: #3f3f3f">
+                A classic Italian pasta dish made with a rich and savory meat sauce. Perfect for a family dinner or a cozy night in.
+            </p>
+        </div>
+    
+    
+        <div class="ingredients">
+            <p><strong>Ingredients</strong></p>
+            <ul>
+                <li>200g spaghetti</li>
+                <li>100g minced beef</li>
+                <li>1 chopped onion</li>
+                <li>2 cloves garlic</li>
+                <li>400g canned tomatoes</li>
+                <li>Salt and pepper</li>
+            </ul>
+        </div>
+    
+        <div class="instructions">
+            <p><strong>Instructions</strong></p>
+            <ol>
+                <li>Cook the spaghetti according to package instructions.</li>
+                <li>In a pan, sauté the onion and garlic until soft.</li>
+                <li>Add the minced beef and cook until browned.</li>
+                <li>Add the canned tomatoes and simmer for 20 minutes.</li>
+                <li>Season with salt and pepper.</li>
+                <li>Serve the sauce over the spaghetti.</li>
+            </ol>
+        </div>
+
+        <div class="actions">
+            <button class="edit-btn" onclick="window.location.href='editPage.html'">Edit Recipe</button>
+            <button class="delete-btn">Delete Recipe</button>
+            <button class="favorite-btn" onclick="window.location.href='favorites.html'">Add to Favorites</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
