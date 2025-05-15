@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feastly - Login</title>
+    {% load static %}
+    <link rel="stylesheet" href=" {% static 'css/authstyles.css' %}">
+    
+</head>
+<body>
+    
+    <h1>Login</h1>
+    <div class="container">
+        <form method="post" id="login-form" >
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" minlength="3" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="3" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <div class="link-container">
+            <a href="{% url 'signup' %}">Create new account</a>
+        </div>
+    </div>
+    
+</body>
+</html>

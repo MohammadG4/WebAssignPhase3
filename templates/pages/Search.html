@@ -12,11 +12,11 @@
         <header>
             <nav>
                 <div class="nav-links">
-                    <a href="">Home</a>
-                    <a href="">Add Recipe</a>
+                    <a href="{% url 'recipe_list' %}">Home</a>
+                    <a href="{% url 'AddRecipe' %}">Add Recipe</a>
                     <a href="">Favorites</a>
-                    <a href="" class="active">Search</a>
-                    <a href="">Logout</a>
+                    <a href="{% url 'search' %}" class="active">Search</a>
+                    <a href="{% url 'login' %}">Logout</a>
                 </div>
             </nav>
         </header>

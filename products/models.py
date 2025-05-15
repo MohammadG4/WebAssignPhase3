@@ -7,4 +7,9 @@ class recipes(models.Model):
     Ingredients = models.CharField(max_length=40)
     isfav = models.BooleanField(default=False)
 
+class user(models.Model):
+    username = models.CharField(max_length=80)
+    password = models.CharField(max_length=100)
+    Email = models.EmailField()
+    isadmin = models.BooleanField(default=False)
 # Create your models here.

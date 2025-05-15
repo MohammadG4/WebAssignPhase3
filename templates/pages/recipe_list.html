@@ -13,8 +13,8 @@
           <a href="{% url 'recipe_list' %}" class="active">Home</a>
           <a href="{% url 'AddRecipe' %}">Add Recipe</a>
           <a href="#">Favorites</a>
-          <a href="#">Search</a>
-          <a href="#">Logout</a>
+          <a href="{% url 'search' %}">Search</a>
+          <a href="{% url 'login' %}">Logout</a>
         </div>
       </nav>
     </header>
