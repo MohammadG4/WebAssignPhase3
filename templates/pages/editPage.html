@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feastly - Edit {{ recipe.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/editstyles.css' %}">
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <a href="{% url 'recipe_list' %}">Home</a>
+          <a href="{% url 'AddRecipe' %}">Add Recipe</a>
+          <a href="{% url 'favorites' %}">Favorites</a>
+          <a href="{% url 'search' %}">Search</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+        <h2>Feastly - {{ recipe.name }}</h2>
+        <form id="recipe-form" method="POST" action="{% url 'EditRecipe' recipe.id %}">
+              {% csrf_token %}
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ recipe.name }}" required>
+            
+            <label for="course">Course Name</label>
+<select id="course" name="course">
+    <option value="appetizers" {% if recipe.course == "appetizers" %}selected{% endif %}>Appetizers</option>
+    <option value="main_course" {% if recipe.course == "main_course" %}selected{% endif %}>Main Course</option>
+    <option value="desserts" {% if recipe.course == "desserts" %}selected{% endif %}>Desserts</option>
+</select>
+
+            
+            <label for="ingredients">Ingredients</label>
+            <div class="ingredients-container">
+                <input type="text" id="ingredients" name="ingredient" placeholder="Ingredients" value="{{ recipe.Ingredients }}" required>
+            </div>
+            <ul id="ingredients-list"></ul>
+            
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" value="{{ recipe.descripition }}" required>
+            
+            <button type="submit">Update Recipe</button>
+<button type="button" id="delete-recipe" class="delete-btn" 
+    onclick="if(confirm('Are you sure you want to delete this recipe?')){ window.location.href='{% url 'delete_recipe' recipe.id %}'; }">
+    Delete Recipe
+</button>
+        </form>
+    </div>
+
+    
+       <!-- <script src="{% static 'js/editPage.js' %}"></script> -->
+    
+</body>
+</html>

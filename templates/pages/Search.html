@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Recipe Search</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/searchstyles.css' %}">
-    </head>
-    
-    <body>
-        <header>
-            <nav>
-                <div class="nav-links">
-                    <a href="{% url 'recipe_list' %}">Home</a>
-                    <a href="{% url 'AddRecipe' %}">Add Recipe</a>
-                    <a href="">Favorites</a>
-                    <a href="{% url 'search' %}" class="active">Search</a>
-                    <a href="{% url 'login' %}">Logout</a>
-                </div>
-            </nav>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Search</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/searchstyles.css' %}" />
+  </head>
 
-        <main>
-            <section class="search-section">
-                <h1>Search Recipes</h1>
-                <form method="get" action="{% url 'search' %}">
-                    <div class="search-container">
-                        <div class="search-box">
-                            <input type="text" name="q" value="{{ query }}" placeholder="Search by recipe name or description...">
-                            <button type="submit">Search</button>
-                        </div>
-                        <div class="filter-box">
-                            <input type="text" name="ingredients" value="{{ ingredients }}" placeholder="Filter by ingredients (comma-separated)">
-                        </div>
-                    </div>
-                </form>
-            </section>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <a href="{% url 'recipe_list' %}">Home</a>
+          <a href="{% url 'AddRecipe' %}">Add Recipe</a>
+          <a href="{% url 'favorites' %}">Favorites</a>
+          <a href="{% url 'search' %}" class="active">Search</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </nav>
+    </header>
 
-            <section class="results-section">
-                <div id="recipes-grid" class="recipes-grid">
-                    {% if recipes %}
-                        {% for recipe in recipes %}
-                            <div class="recipe-card">
-                                <h3>{{ recipe.name }}</h3>
-                                <p><strong>Course:</strong> {{ recipe.course }}</p>
-                                <p><strong>Description:</strong> {{ recipe.description }}</p>
-                                <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
-                                {% if recipe.is_favorite %}
-                                    <p>★ Favorite</p>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <p>No recipes found.</p>
-                    {% endif %}
-                </div>
-            </section>
-        </main>
+    <main>
+      <section class="search-section">
+        <h1>Search Recipes</h1>
+        <form method="get" action="{% url 'search' %}">
+          <div class="search-container">
+            <div class="search-box">
+              <input
+                type="text"
+                name="q"
+                value="{{ query }}"
+                placeholder="Search by recipe name or description..."
+              />
+              <button type="submit">Search</button>
+            </div>
+            <div class="filter-box">
+              <input
+                type="text"
+                name="ingredients"
+                value="{{ ingredients }}"
+                placeholder="Filter by ingredients (comma-separated)"
+              />
+            </div>
+          </div>
+        </form>
+      </section>
 
-        <footer>
-            <p>&copy; 2024 Recipe Management System. All rights reserved.</p>
-        </footer>
-    </body>
+      <section class="results-section">
+        <div id="recipes-grid" class="recipes-grid">
+          {% if recipes %} {% for recipe in recipes %}
+          <div class="recipe-card">
+            <h3>{{ recipe.name }}</h3>
+            <p><strong>Course:</strong> {{ recipe.course }}</p>
+            <p>
+              <strong>Description:</strong> {{recipe.descripition|truncatechars:30 }}
+            </p>
+            <p>
+              <strong>Ingredients:</strong> {{recipe.Ingredients|truncatechars:30}}
+            </p>
+
+<div class="card-actions">
+
+            <a href="{% url 'RecipePage' recipe.id %}" class="details-btn">View Details</a>
+            {% if user.is_staff %}
+          <a href="{% url 'EditRecipe' recipe.id %}" class="edit-btn">Edit</a>
+          {%endif%}
+            {% if recipe.id in favs %}
+            <a href="{% url 'remove_from_favorites' recipe.id %}" class="favorite-btn" style="text-decoration:none" data-name="${recipe.name}">
+              ❤️ Remove from Favorites
+            </a>
+            {% else %}
+            <a href="{% url 'add_to_favorites' recipe.id %}" class="favorite-btn" style="text-decoration:none" data-name="${recipe.name}">
+              🤍 Add to Favorites
+            </a>
+            {% endif %}
+
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <p>No recipes found.</p>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Recipe Management System. All rights reserved.</p>
+    </footer>
+  </body>
 </html>

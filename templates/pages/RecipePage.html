@@ -1,71 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-<link rel = "stylesheet" href="{% static 'css/Recipepage.css' %}">
-
-    <title>Feastly - Recipe Details</title>
+    <link rel="stylesheet" href="{% static 'css/Recipepage.css' %}">
+    <title>Feastly - {{ recipe.name }}</title>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-      <ul>
-        <li><a href="{% url 'recipe_list' %}">Home</a></li>
-        <li><a href="{% url 'AddRecipe' %}">Add Recipe</a></li>
-        <li><a href="#">Favorites</a></li>
-        <li><a href="{% url 'search' %}">Search</a></li>
-        <li><a href="{% url 'login' %}">Logout</a></li>
-      </ul>
+<header>
+    <nav>
+        <div class="nav-links">
+          <a href="{% url 'recipe_list' %}" >Home</a>
+          {% if user.is_staff %}
+          <a href="{% url 'AddRecipe' %}">Add Recipe</a>
+          {%endif%}
+          <a href="{% url 'favorites' %}">Favorites</a>
+          <a href="{% url 'search' %}">Search</a>
+          <a href="{% url 'logout' %}">Logout</a>
+
+        </div>
     </nav>
+</header>
 
-    <!-- <div class="background"></div> -->
+<div class="container">
+    <h2>Recipe name: {{ recipe.name }}</h2>
 
-    <div class="container">
-        <h2>Recipe name: Spaghetti Bolognese</h2>
+    <p style="color: #3f3f3f;">{{ recipe.course }}</p>
+
+    <div>
+    <p style="font-size: smaller; color: #3f3f3f">
+        {% for sentence in description_sentences %}
+            {% if sentence.strip %}
+                {{ sentence }}.
+                <br>
+            {% endif %}
+        {% endfor %}
+    </p>
+</div>
+
+<div class="ingredients">
+    <p><strong>Ingredients</strong></p>
+    <ul>
+        {% for ing in ingredients_list %}
+            {% if ing.strip %}
+                <li>{{ ing }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
     
-        <p style="color: #3f3f3f;">Course name</p>
-    
-        <div>
-            <p style="font-size: smaller; color: #3f3f3f">
-                A classic Italian pasta dish made with a rich and savory meat sauce. Perfect for a family dinner or a cozy night in.
-            </p>
-        </div>
-    
-    
-        <div class="ingredients">
-            <p><strong>Ingredients</strong></p>
-            <ul>
-                <li>200g spaghetti</li>
-                <li>100g minced beef</li>
-                <li>1 chopped onion</li>
-                <li>2 cloves garlic</li>
-                <li>400g canned tomatoes</li>
-                <li>Salt and pepper</li>
-            </ul>
-        </div>
-    
-        <div class="instructions">
+</div>
+<div class="instructions">
             <p><strong>Instructions</strong></p>
             <ol>
-                <li>Cook the spaghetti according to package instructions.</li>
-                <li>In a pan, sauté the onion and garlic until soft.</li>
-                <li>Add the minced beef and cook until browned.</li>
-                <li>Add the canned tomatoes and simmer for 20 minutes.</li>
-                <li>Season with salt and pepper.</li>
-                <li>Serve the sauce over the spaghetti.</li>
+                {% for sentence in description_sentences %}
+            {% if sentence.strip %}
+            <li>    
+            {{ sentence }}.
+                </li>
+            {% endif %}
+        {% endfor %}
+               
             </ol>
         </div>
+        
+    <div class="actions">
+    {% if recipe.id in favs %}
+        <a href="{% url 'remove_from_favorites' recipe.id %}" class="favorite-btn" style="text-decoration:none">
+            ❤️ Remove from Favorites
+        </a>
+    {% else %}
+        <a href="{% url 'add_to_favorites' recipe.id %}" class="favorite-btn" style="text-decoration:none">
+            🤍 Add to Favorites
+        </a>
+    {% endif %}
+    {% if user.is_staff %}
+          <a href="{% url 'EditRecipe' recipe.id %}" class="edit-btn">Edit Recipe</a>
+     
+    <a type="button" id="delete-recipe" class="delete-btn" 
+       onclick="if(confirm('Are you sure you want to delete this recipe?')) { 
+                 window.location.href='{% url 'delete_recipe' recipe.id %}'; 
+               }">
+        Delete Recipe
+    </a>
+          {%endif%}
+   
+</div>
 
-        <div class="actions">
-            <button class="edit-btn" onclick="window.location.href='editPage.html'">Edit Recipe</button>
-            <button class="delete-btn">Delete Recipe</button>
-            <button class="favorite-btn" onclick="window.location.href='favorites.html'">Add to Favorites</button>
-        </div>
-    </div>
+</div>
 
 </body>
 </html>
-

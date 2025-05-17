@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Favorites</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/favorites.css' %}">
+  </head>
+  <body>
+    <!-- Header with Navigation -->
+    <header>
+      <nav>
+       <div class="nav-links">
+          <a href="{% url 'recipe_list' %}">Home</a>
+          {% if user.is_staff %}
+          <a href="{% url 'AddRecipe' %}">Add Recipe</a>
+          {%endif%}
+          <a href="{% url 'favorites' %}" class="active">Favorites</a>
+          <a href="{% url 'search' %}">Search</a>
+          <a href="{% url 'logout' %}">Logout</a>
+
+        </div>
+      </nav>
+    </header>
+
+    <h1>❤️ My Favorite Recipes</h1>
+
+      <div class="recipes-container">
+  {% for fav in favorites %}
+    <div class="recipe-card">
+      <h2>{{ fav.recipe.name }}</h2>
+      <p><strong>Course:</strong> {{ fav.recipe.course }}</p>
+      <p><strong>Ingredients:</strong> {{ fav.recipe.Ingredients }}</p>
+      <p class="description">{{ fav.recipe.descripition }}</p>
+      <div class="card-actions">
+        <a href="{% url 'RecipePage' fav.recipe.id %}" class="details-btn">View Details</a>
+        {% if user.is_staff %}
+           <div class="action-buttons">
+          <a href="{% url 'EditRecipe' fav.recipe.id %}" class="edit-btn">Edit</a>
+          <a href="{% url 'remove_from_favorites' fav.recipe.id %}" class="remove-favorite" style="text-decoration: none;">Remove from Favorites</a>
+        </div>
+        {%endif%}
+      </div>
+       
+    </div>
+  {% empty %}
+    <div class="empty-state">
+      <p>You haven't added any recipes to your favorites yet.</p>
+      <a href="{% url 'recipe_list' %}" class="browse-btn">Browse Recipes</a>
+    </div>
+  {% endfor %}
+</div>
+
+
+    <div class="empty-state" style="display: none;">
+      <p>You haven't added any recipes to your favorites yet.</p>
+      <a href="recipes_list.html" class="browse-btn">Browse Recipes</a>
+    </div>
+    <!-- <script src="../assets/js/favorites.js"></script> -->
+  </body>
+</html> 

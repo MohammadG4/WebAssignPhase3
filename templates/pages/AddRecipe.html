@@ -13,9 +13,9 @@
         <div class="nav-links">
           <a href="{% url 'recipe_list' %}">Home</a>
           <a href="{% url 'AddRecipe' %}" class="active">Add Recipe</a>
-          <a href="#">Favorites</a>
+          <a href="{% url 'favorites' %}">Favorites</a>
           <a href="{% url 'search' %}">Search</a>
-          <a href="{% url 'login' %}">Logout</a>
+          <a href="{% url 'logout' %}">Logout</a>
         </div>
       </nav>
     </header>
@@ -48,6 +48,5 @@
     </div>
 
         
-      
 </body>
 </html>

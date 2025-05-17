@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import recipes
-from .models import user
+from .models import recipes,Favorite
+
 admin.site.register(recipes)
-admin.site.register(user)
+admin.site.register(Favorite)
+
 
 # Register your models here.
